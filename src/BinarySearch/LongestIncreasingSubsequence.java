@@ -17,5 +17,38 @@ package BinarySearch;
 
 
 public class LongestIncreasingSubsequence {
+	public int lengthOfLIS(int[] nums) {            
+        int[] dp = new int[nums.length];
+        int len = 0;
 
+        for(int x : nums) {
+            int i = binarySearch(dp, len, x);
+            dp[i] = x;
+            if(i == len) len++;
+        }
+
+        return len;
+    }
+    
+    public int binarySearch(int[] dp, int high, int key){
+        
+        
+        int low = 0;
+        while(high > low){
+            int mid = low + (high - low) / 2;
+            if(dp[mid] == key){
+                return mid;
+            }
+            
+            else if(dp[mid] > key){
+                high = mid;
+            }
+            
+            else{
+                low = mid + 1;
+            }
+        }
+        
+        return low;
+    }
 }
