@@ -18,13 +18,24 @@ package DP;
  * */
 
 public class StockCooldown {
+	public static void main(String[] args) {
+		StockCooldown solution = new StockCooldown();
+		int[] prices = new int[]{1,5,1,6,1,7,1,8};
+		solution.maxProfit(prices);
+	}
+	
 	public int maxProfit(int[] prices) {
         int pre_buy = 0, buy = Integer.MIN_VALUE, pre_sell = 0, sell = 0;
+        int k = 0;
         for(int price : prices){
             pre_buy = buy;
             buy = Math.max(pre_sell - price, pre_buy);
+            //buy = Math.max(sell - price, pre_buy);
+            System.out.println("buy[" + k +"] = " + buy + "  ");
             pre_sell = sell;
             sell = Math.max(pre_buy + price, pre_sell);
+            //System.out.println("sell[" + k +"] = " + sell + "  ");
+            k++;
         }
         
         return sell;
